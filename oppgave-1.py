@@ -1,12 +1,17 @@
 # Oppgave 1.1 - Beregn tidsbruk
 def oppgave1_1 ():
-    study_sessions = int(input("Antall studieøkter:"))
-    minutes_per_session = int(input("Hvor mange minutter varer hver studieøkt?"))
+    while True:
+        try:
+            study_sessions = int(input("Antall studieøkter:"))
+            minutes_per_session = int(input("Hvor mange minutter varer hver studieøkt?"))
 
-    while study_sessions <= 0 or minutes_per_session <= 0:
-        print("Prøv igjen")
-        study_sessions = int(input("Antall studieøkter:"))
-        minutes_per_session = int(input("Hvor mange minutter varer hver studieøkt?"))
+            if study_sessions <= 0 or minutes_per_session <= 0:
+                print("Prøv igjen")
+            else:
+                break
+
+        except ValueError:
+            print("Ugyldig data.")
 
     total_minutes = study_sessions * minutes_per_session
     hours = total_minutes // 60
