@@ -7,7 +7,9 @@ study_sessions = [
     {"topic":"Religion", "duration_minutes":45, "status":"completed"}
 ]
 
-while True:
+running = True
+
+while running:
     print("\n1. Registrer en studieøkt.")
     print("2. Vis alle studieøkter")
     print("3. Vis fullførte studieøkter")
@@ -18,7 +20,7 @@ while True:
 
     choice = input("Velg et alternativ (1-7): ")
 
-    if choice == "1":
+    if choice == "1": # Registrer en studieøkt.
         topic = input("Tema: ")
 
         while topic == "":
@@ -49,3 +51,39 @@ while True:
             "status": status
         }
         study_sessions.append(new_session)
+
+    elif choice == "2": # Vis alle studieøkter
+        for session in study_sessions:
+            print(session["topic"], "-", session["duration_minutes"], "-", session["status"])
+
+    elif choice == "3": # Vis fullførte studieøkter
+        for session in study_sessions:
+            if session["status"] == "completed":
+                print(session["topic"], "-", session["status"])
+
+    elif choice == "4": # Søk etter ord i temaet
+        word_search = input("Søk etter tema: ")
+
+        for session in study_sessions:
+            if word_search.lower() in session["topic"].lower(): # Gjorde lignende i 1.2 
+                print(session)
+
+    # elif choice == "5": # Sorter etter varighet
+        
+
+    # elif choice == "6": # Vis samlet og gjennomsnittlig varighet
+
+    # else:
+        # print("Hadebra!") # Avslutt
+        # running = False
+
+
+
+               
+
+
+
+
+
+
+
