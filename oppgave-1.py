@@ -10,7 +10,7 @@ def oppgave1_1 ():
             else:
                 break
 
-        except ValueError:
+        except ValueError: # Forventer feil - og svarer på det istedenfor å kræsje
             print("Ugyldig data.")
 
     total_minutes = study_sessions * minutes_per_session
@@ -20,7 +20,6 @@ def oppgave1_1 ():
     print (f"Samlet tidsbruk: {hours} timer og {remaining_minutes} minutter.")
 
 oppgave1_1()
-# hvordan ikke akseptere tekst? try except
 
 
 # Oppgave 1.2 - Analyser tekst
@@ -31,9 +30,9 @@ def oppgave1_2 ():
         print("Feil! Må være gyldig input")
         text = input("Skriv inn en tekst: ")
 
-    print(len(text))
+    print(len(text)) # Teller antall tegn - inkludert mellomrom
 
-    text_without_spaces = text.replace(" ", "")   # kom opp automatisk
+    text_without_spaces = text.replace(" ", "")   # Kom opp automatisk løsning
     print(len(text_without_spaces))
 
     print(text.lower())
@@ -58,7 +57,7 @@ def oppgave1_3 ():
         start_value = int(input("Startverdi: "))
         end_value = int(input("Endverdi: "))
 
-    for number in range(start_value, end_value + 1):
+    for number in range(start_value, end_value + 1): # +1 for å få med sluttverdien
         if number % 2 == 0:
             print(number)
 
@@ -77,7 +76,7 @@ oppgave1_3()
 
 # Oppgave 1.4
 running = True
-
+# Programmet kjøres på nytt helt til running = False
 while running:
     print("\n1. Beregn tidsbruk")
     print("2. Analysser tekst")
@@ -87,7 +86,7 @@ while running:
     choice = input("Velg et alternativ (1-4): ")
 
     if choice == "1":
-        oppgave1_1()
+        oppgave1_1() # Kaller tilbake oppgavene som ligger i funksjoner - slipper å skrive alt på nytt
 
     elif choice == "2":
         oppgave1_2()
