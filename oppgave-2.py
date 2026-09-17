@@ -68,14 +68,30 @@ while running:
             if word_search.lower() in session["topic"].lower(): # Gjorde lignende i 1.2 
                 print(session)
 
-    # elif choice == "5": # Sorter etter varighet
-        
+    elif choice == "5": # Sorter etter varighet
+        def sort_duration (session):
+            return session["duration_minutes"]
+        study_sessions.sort(key=sort_duration, reverse=True) # Denne løsningen kom opp automatisk i programmet
 
-    # elif choice == "6": # Vis samlet og gjennomsnittlig varighet
+        for session in study_sessions:
+            print(session["topic"], "-", session["duration_minutes"])
 
-    # else:
-        # print("Hadebra!") # Avslutt
-        # running = False
+
+    elif choice == "6": # Vis samlet og gjennomsnittlig varighet
+        total_duration = 0
+
+        for session in study_sessions:
+            if session["status"] == "completed":
+                total_duration = total_duration + session["duration_minutes"]
+
+        average_duration = total_duration / len(study_sessions)
+
+        print(f"Samlet varighet: {total_duration} minutter")
+        print(f"Gjenomsnittlig varighet: {average_duration} minutter")
+
+    else:
+        print("Hadebra!") # Avslutt
+        running = False
 
 
 
