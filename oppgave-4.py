@@ -2,7 +2,7 @@
 import csv
 
 # Oppgave 4.1 - Les og kontroller data
-valid_requests = []
+valid_requests = []   # Liste for gyldige henvendelser
 
 try:
     with open("supporthenvendelser.csv", "r", encoding="utf-8") as file:  # "r" betyr at filen åpnes for reading
@@ -39,7 +39,7 @@ try:
                 print(f"Rad {row_number}: is_resolved må være yes eller no")
                 continue
 
-            # Raden er gyldig og legges til i listen
+            # Legger gyldige henvendelser til i listen
             valid_requests.append({
                 "id": request_id,
                 "category": row["category"],
@@ -48,4 +48,41 @@ try:
             })
 
 except FileNotFoundError:
-    print("Filen ble ikke funnet")
+    print("Filen ble ikke funnet")   # Feilmelding hvis filen ikke finns
+
+
+
+# Oppgave 4.2 - Analyser data
+# Antall gyldige henvendelser
+number_of_requests = len(valid_requests)  # Alle gyldige hevnevdelser ligger i valid_requests[], så alle elementer i listen er gyldige
+print(f"Antall gyldige henvendelser: {number_of_requests}")
+
+# Antall henvendelser per kategori
+category_count = {}  # Tom dictionary
+
+for request in valid_requests:   # Henter category fra hver dictionary
+    category = request["category"]
+
+    if category in category_count:   # Sjekker om kategorien finns
+        category_count[category] += 1  # += legger noe til verdien som finns i en variabel
+    else:
+        category_count[category] = 1
+
+print(category_count)
+
+# Samlet tidsbruk
+total_minutes = 0
+
+for request in valid_requests:
+    total_minutes += request["minutes"]
+
+print(f"Samlet tidsbruk: {total_minutes} minutter")
+
+
+# Gjennomsnittlig tidsbruk
+average_minutes = total_minutes / number_of_requests
+
+print(f"Gjennomsnittlig tidsbruk: {average_minutes:.1f} minutter")  #.1f viser 1 desimal
+
+
+
