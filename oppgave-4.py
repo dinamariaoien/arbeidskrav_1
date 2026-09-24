@@ -8,9 +8,9 @@ try:
     with open("supporthenvendelser.csv", "r", encoding="utf-8") as file:  # "r" betyr at filen åpnes for reading
         reader = csv.DictReader(file)  # DictReader gjør hver rad til en dictionary.
 
-        for row_number, row in enumerate(reader, start=2):  # start på 2 fordi første linje er overskriften
+        for row_number, row in enumerate(reader, start=2):  # starter bare på 2 fordi første linje er overskriften
 
-            # Sjekker om alle felt har verdi
+            # Sjekker om alle feltene har en verdi
             if not row["id"] or not row["category"] or not row["minutes"] or not row["is_resolved"]:
                 print(f"Rad {row_number}: Mangler verdi")
                 continue
@@ -57,6 +57,7 @@ except FileNotFoundError:
 number_of_requests = len(valid_requests)  # Alle gyldige hevnevdelser ligger i valid_requests[], så alle elementer i listen er gyldige
 print(f"Antall gyldige henvendelser: {number_of_requests}")
 
+
 # Antall henvendelser per kategori
 category_count = {}  # Tom dictionary
 
@@ -69,6 +70,7 @@ for request in valid_requests:   # Henter category fra hver dictionary
         category_count[category] = 1
 
 print(category_count)
+
 
 # Samlet tidsbruk
 total_minutes = 0
@@ -85,4 +87,85 @@ average_minutes = total_minutes / number_of_requests
 print(f"Gjennomsnittlig tidsbruk: {average_minutes:.1f} minutter")  #.1f viser 1 desimal
 
 
+# Teller løste og uløste henvendelser
+count_resolved = 0
+count_unresolved = 0
+
+for request in valid_requests:
+    if request["is_resolved"] == "yes":
+        count_resolved += 1
+    else:
+        count_unresolved += 1
+
+print(f"Løste henvendelser: {count_resolved}")
+print(f"Uløste henvendelser: {count_unresolved}")
+
+
+# Finner kategorien med flest henvendelser
+most_common_category = ""
+
+for category in category_count:
+    if most_common_category == "":
+        most_common_category = category
+
+    elif category_count[category] > category_count[most_common_category]:
+        most_common_category = category
+
+print(f"Kategori med flest henvendelser: {most_common_category}")
+
+
+# Lager en liste med uløste henvendelser
+unresolved_requests = []  # Tom liste
+
+for request in valid_requests:
+    if request["is_resolved"] == "no":
+        unresolved_requests.append(request)
+
+
+# Sorterer uløste henvendelser etter tidsbruk, lengst først
+def get_minutes(request):
+    return request["minutes"]
+
+unresolved_requests.sort(key=get_minutes, reverse=True)  # Reverse viser lengsst først
+
+print("Uløste henvendelser:")
+
+for request in unresolved_requests:
+    print(request)
+
+
+
+# Oppgave 4.3 - Skrive rapport
+with open("support-rapport.txt", "w", encoding="utf-8") as file:
+
+    file.write("RAPPORT\n")  # Overskrift
+
+    file.write(f"Antall gyldige henvendelser: {number_of_requests}\n")
+
+    file.write("\nAntall i hver kategori\n")
+    for category in category_count:
+        file.write(f"{category}: {category_count[category]}\n")
+
+    file.write("\nTidsbruk\n")
+    file.write(f"Samlet tidsbruk: {total_minutes} minutter\n")
+    file.write(f"Gjennomsnittlig tidsbruk: {average_minutes:.1f} minutter\n")
+
+    file.write("\nStatus på henvendelsene\n")
+    file.write(f"Løste henvendelser: {count_resolved}\n")
+    file.write(f"Uløste henvendelser: {count_unresolved}\n")
+
+    file.write("\nFlest henvendelser\n")
+    file.write(f"{most_common_category}\n")
+
+    file.write("\nUløste henvendelser\n")
+
+    for request in unresolved_requests:
+        file.write(
+            f"ID: {request['id']}, "
+            f"Kategori: {request['category']}, "
+            f"Minutter: {request['minutes']}\n"
+        )
+
+
+# Oppgave 4.4 - Finn og rett feil
 
