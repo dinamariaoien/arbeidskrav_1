@@ -1,0 +1,27 @@
+RAPPORT
+Antall gyldige henvendelser: 15
+
+Antall i hver kategori
+innlogging: 4
+programvare: 4
+nettverk: 2
+utstyr: 5
+
+Tidsbruk
+Samlet tidsbruk: 466 minutter
+Gjennomsnittlig tidsbruk: 31.1 minutter
+
+Status på henvendelsene
+Løste henvendelser: 9
+Uløste henvendelser: 6
+
+Flest henvendelser
+utstyr
+
+Uløste henvendelser
+ID: 13, Kategori: utstyr, Minutter: 63
+ID: 4, Kategori: utstyr, Minutter: 55
+ID: 10, Kategori: programvare, Minutter: 48
+ID: 2, Kategori: programvare, Minutter: 42
+ID: 17, Kategori: utstyr, Minutter: 39
+ID: 7, Kategori: nettverk, Minutter: 35
