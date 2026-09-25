@@ -97,9 +97,9 @@ def search_title_category(activities):
             print(activity.title, activity.category, activity.date, activity.estimated_minutes, activity.status)
 
 
-#Funksjon 4
+# Funksjon 4
 def get_date(activity):   # Funksjon til menyvalg 5, henter ut varigheten så .sort() kan gjøre jobben sin
-    return datetime.strptime(activity.date, "%d.%m.%Y")
+    return datetime.strptime(activity.date, "%d.%m.%Y")  # Kovnerterer tekst til en datoverdi
 
 # Funksjon 5
 def get_duration(activity):  # Funksjon til menyvalg 5
@@ -162,12 +162,56 @@ while running:   # Gjorde lignende meny i oppgave 2
             sort_choice = input("Velg 1 eller 2:")
 
         if sort_choice == "1":
-                activities.sort(key=get_date)
+                activities.sort(key=get_date)   # Key forteller sort() hvilken verdi den skal bruke
                 show_activities(activities)
 
         elif sort_choice == "2":
                 activities.sort(key=get_duration)
                 show_activities(activities)
+
+
+    # Markere en aktivitet som fullført
+    elif choice == "6":
+        title = input("Skriv tittelen på aktiviteten som er fullført: ")
+
+        while title == "" or title == " ":
+            print("Tittel kan ikke være tom.")
+            title = input("Skriv tittelen på aktiviteten som er fullført: ")
+
+        for activity in activities:
+            if activity.title.lower() == title.lower():  # lower gjør teksten til små bokstaver for å sammenligne titlene
+                activity.mark_completed()   # Metoden i Activity klassen
+                print("Aktiviteten er markert som fullført.")
+
+
+    # Vise antall aktiviteter, samlet estimert tid og antall fullførte.
+    elif choice == "7":
+        # Antall aktiviteter
+        number_of_activities = len(activities)
+
+        # Regner ut samlet tid
+        total_minutes = 0
+        for activity in activities:
+            total_minutes += activity.estimated_minutes   # += er en kortere måte å skrive : total = xx + yy (eksempel)
+
+        # Fullførte aktiviteter
+        completed_count = 0
+        for activity in activities:    # Gjort lignende tidligeere i arbeidskravet + løsningen kom opp automatisk
+            if activity.status == "completed":
+                completed_count += 1
+
+        print(f"Antall aktiviteter: {number_of_activities}")
+        print(f"Samlet estimert tid: {total_minutes}")
+        print(f"Antall fullførte aktiviteter: {completed_count}")
+
+
+    # Lagre aktiviteter til fil og lese dem inn igjen.
+    elif choice == "8":
+
+    # Avslutt
+    else:
+        print("Hadebra!")
+        running = False
 
 
 
