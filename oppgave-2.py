@@ -1,5 +1,5 @@
 # Oppgave 2 Oppgave 2 – Datastrukturer og behandling av data
-study_sessions = [
+study_sessions = [   # Liste med dictionaries
     {"topic":"Math", "duration_minutes":45, "status":"completed"},
     {"topic":"Science", "duration_minutes":120, "status":"planned"},
     {"topic":"Business", "duration_minutes":30, "status":"planned"},
@@ -7,10 +7,10 @@ study_sessions = [
     {"topic":"Religion", "duration_minutes":45, "status":"completed"}
 ]
 
-running = True
+running = True  # Programmet kjøres helt til det blir fortalt at det skal slutte
 
 while running:
-    print("\n1. Registrer en studieøkt.")
+    print("\n1. Registrer en studieøkt.")   # Meny
     print("2. Vis alle studieøkter")
     print("3. Vis fullførte studieøkter")
     print("4. Søk etter ord i temaet")
@@ -36,12 +36,12 @@ while running:
                 else:
                     print("Må være et positivt tall.")
 
-            except ValueError:
+            except ValueError:  # Gir feilmelding istedenfor å kræsje
                 print("Må være et heltall.")
 
         status = input("Status (planned/completed): ")
 
-        while status != "planned" and status != "completed":
+        while status != "planned" and status != "completed":   # != betyr "er ikke lik"
             print("Status må være planned eller completed.")
             status = input("Status (planned/completed): ")
 
@@ -50,25 +50,29 @@ while running:
             "duration_minutes": duration_minutes,
             "status": status
         }
-        study_sessions.append(new_session)
+        study_sessions.append(new_session)  # append legger til i listen
 
-    elif choice == "2": # Vis alle studieøkter
+    # Vis alle studieøkter
+    elif choice == "2":
         for session in study_sessions:
             print(session["topic"], "-", session["duration_minutes"], "-", session["status"])
 
-    elif choice == "3": # Vis fullførte studieøkter
+    # Vis fullførte studieøkter
+    elif choice == "3":
         for session in study_sessions:
             if session["status"] == "completed":
                 print(session["topic"], "-", session["status"])
 
-    elif choice == "4": # Søk etter ord i temaet
+    # Søk etter ord i temaet
+    elif choice == "4":
         word_search = input("Søk etter tema: ")
 
         for session in study_sessions:
             if word_search.lower() in session["topic"].lower(): # Gjorde lignende i 1.2 
                 print(session)
 
-    elif choice == "5": # Sorter etter varighet
+    # Sorter etter varighet
+    elif choice == "5":
         def sort_duration (session):
             return session["duration_minutes"]
         study_sessions.sort(key=sort_duration, reverse=True) # Denne løsningen kom opp automatisk i programmet
@@ -76,8 +80,8 @@ while running:
         for session in study_sessions:
             print(session["topic"], "-", session["duration_minutes"])
 
-
-    elif choice == "6": # Vis samlet og gjennomsnittlig varighet
+    # Vis samlet og gjennomsnittlig varighet
+    elif choice == "6":
         total_duration = 0
 
         for session in study_sessions:
@@ -89,9 +93,10 @@ while running:
         print(f"Samlet varighet: {total_duration} minutter")
         print(f"Gjenomsnittlig varighet: {average_duration} minutter")
 
+    # Avslutt
     else:
-        print("Hadebra!") # Avslutt
-        running = False
+        print("Hadebra!")
+        running = False  # Blir fortalt at programmet skal slutte
 
 
 
