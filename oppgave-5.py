@@ -1,4 +1,6 @@
 # Oppgave 5 - Miniprosjekt: aktivitetsplanlegger
+from datetime import datetime
+
 class Activity:
     """Beskriver en planlagt eller fullførst aktivitet."""  # Docstring
 
@@ -95,6 +97,15 @@ def search_title_category(activities):
             print(activity.title, activity.category, activity.date, activity.estimated_minutes, activity.status)
 
 
+#Funksjon 4
+def get_date(activity):   # Funksjon til menyvalg 5, henter ut varigheten så .sort() kan gjøre jobben sin
+    return datetime.strptime(activity.date, "%d.%m.%Y")
+
+# Funksjon 5
+def get_duration(activity):  # Funksjon til menyvalg 5
+    return activity.estimated_minutes
+
+
 
 running = True
 
@@ -111,10 +122,53 @@ while running:   # Gjorde lignende meny i oppgave 2
 
     choice = input("Velg et alternativ (1-9): ")
 
+
+    # Registrer aktivitet
     if choice == "1":
         add_activities(activities)
 
+
+    # Vis alle aktiviteter
     elif choice == "2":
         show_activities(activities)
+
+
+    # Søke etter tittel eller kategori
+    elif choice == "3":
+        search_title_category(activities)
+
+
+    # Filtrer etter status
+    elif choice == "4":
+        status = input("Velg status (planned/completed: ")
+
+        while status != "planned" and status != "completed":  # != betyr : er ikke lik
+            print("Ugyldig status")
+            status = input("Velg status (planned/completed): ")
+
+        for activity in activities:
+            if activity.status == status:
+                print(activity.title, activity.category, activity.date, activity.estimated_minutes, activity.status)
+
+
+    # Sortere etter dato eller varighet.
+    elif choice == "5":
+        print("Hva vil du sortere etter?\n1. Dato\n2. Varighet")
+
+        sort_choice = input("Velg 1 eller 2:")
+
+        while sort_choice != "1" and sort_choice != "2":
+            print("Ugyldig valg, prøv igjen!")
+            sort_choice = input("Velg 1 eller 2:")
+
+        if sort_choice == "1":
+                activities.sort(key=get_date)
+                show_activities(activities)
+
+        elif sort_choice == "2":
+                activities.sort(key=get_duration)
+                show_activities(activities)
+
+
 
 
