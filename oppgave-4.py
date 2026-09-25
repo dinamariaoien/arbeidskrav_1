@@ -168,4 +168,11 @@ with open("support-rapport.txt", "w", encoding="utf-8") as file:
 
 
 # Oppgave 4.4 - Finn og rett feil
+def sum_resolved_minutes(requests: list[dict[str, str | int]]) -> int:
+    total = 0
+    for request in requests:
+        if request["is_resolved"] == "yes":  # Endret fra = til ==
+            total += request["minutes"]  # Endret til += fordi det skal legges til verdi, ikke erstatte
+    return total  # Endret fra total_minutes til total, fordi total_minutes er ikke en eksisterende variabel i denne funksjonen
 
+print(sum_resolved_minutes(valid_requests)) # lat til valid_requests i (), fordi funksjonen trenger en liste å kjøre
