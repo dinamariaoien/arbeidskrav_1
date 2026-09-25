@@ -82,7 +82,7 @@ def show_activities(activities):
         print("Ingen registrerte")
     else:
         for activity in activities:
-            print(activity.title, activity.category, activity.date, activity.estimated_minutes)
+            print(f"Tittel: {activity.title}, Kategori: {activity.category}, Dato: {activity.date}, Estimert tid: {activity.estimated_minutes}, Status: {activity.status}")
 
 
 # Funksjon 3 - filtrere etter status
@@ -111,7 +111,7 @@ def get_duration(activity):  # Funksjon til menyvalg 5
 # Lagre aktiviteter til fil og lese dem inn igjen.
 # Funksjon 6 - lagrer aktivitetene i en fil
 def save_activities(activities, filename):
-    with open(filename, "w", encoding="utf-8") as file:  # w - write
+    with open(filename, "w", encoding="utf-8") as file:  # w - write, gjorde lignende tidligere i oppg 4.
         for activity in activities:
             file.write(
                 f"{activity.title},{activity.category},{activity.date},"
@@ -125,7 +125,7 @@ def read_activities(filename):
     try:
         with open(filename, "r", encoding="utf-8") as file:
             for line in file:
-                title, category, date, estimated_minutes, status = line.strip().split(",")
+                title, category, date, estimated_minutes, status = line.strip().split(",")  # srip fjerner tomrom og linjeskift, split deler teksten opp i flere deler
 
                 activity = Activity(
                     title,
@@ -143,7 +143,7 @@ def read_activities(filename):
     return activities
 
 
-# Leser inn lagrede aktiviteter når programmet starter
+# Leser inn lagrede aktiviteter når programmet starter, før menyen vises
 activities = read_activities("activities.txt")
 
 
@@ -185,11 +185,11 @@ while running:   # Gjorde lignende meny i oppgave 2
 
         while status != "planned" and status != "completed":  # != betyr : er ikke lik
             print("Ugyldig status")
-            status = input("Velg status (planned/completed): ")
+            status = input("Velg status planned/completed: ")
 
         for activity in activities:
             if activity.status == status:
-                print(activity.title, activity.category, activity.date, activity.estimated_minutes, activity.status)
+                print(f"Tittel: {activity.title}, Kategori: {activity.category}, Dato: {activity.date}, Estimert tid: {activity.estimated_minutes}, Status: {activity.status}")
 
 
     # Sortere etter dato eller varighet.
