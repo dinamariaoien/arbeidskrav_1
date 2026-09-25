@@ -26,7 +26,8 @@ activities = [
     Activity("Levere arbeidskrav", "Skole", "22.09.2026", 15, "completed"),
 ]
 
-# Funksjon 1
+
+# Funksjon 1 - registrere og vise aktiviteter
 def add_activities(activities):
     """Legger til aktivitetet, som kan brukes senere i programmet"""
     # Tittel
@@ -74,17 +75,17 @@ def add_activities(activities):
     print("Aktivitet registrert!")
 
 
-# Funksjon 2
+# Funksjon 2 - søke etter tittel eller kategori
 def show_activities(activities):
     """Funksjonen viser alle aktivitetene"""
-    if len(activities) == 0:  # len() - viser hvis ingen aktiviteter hadde vært registrert, med det er allerede registrerte aktiviteter son jeg har lagt i en liste, så vet ikke om det er nødvendig?
+    if len(activities) == 0:  # len() - viser hvis ingen aktiviteter hadde vært registrert
         print("Ingen registrerte")
     else:
         for activity in activities:
             print(activity.title, activity.category, activity.date, activity.estimated_minutes)
 
 
-# Funksjon 3
+# Funksjon 3 - filtrere etter status
 def search_title_category(activities):
     search = input("Søk etter tittel eller kategori:")
 
@@ -93,20 +94,60 @@ def search_title_category(activities):
         search = input("Søk etter tittel eller kategori:")
 
     for activity in activities:
-        if search in activity.title or search in activity.category:
-            print(activity.title, activity.category, activity.date, activity.estimated_minutes, activity.status)
+        if search.lower() in activity.title.lower() or search.lower() in activity.category.lower():
+            print(f"Tittel: {activity.title}, Kategori: {activity.category}, Dato: {activity.date}, Estimert tid: {activity.estimated_minutes}, Status: {activity.status}")
 
 
-# Funksjon 4
-def get_date(activity):   # Funksjon til menyvalg 5, henter ut varigheten så .sort() kan gjøre jobben sin
+# Sortere etter dato eller varighet.
+# Funksjon 4 - dato
+def get_date(activity):   # Funksjon til menyvalg 5, henter ut datoene så .sort() kan gjøre jobben sin
     return datetime.strptime(activity.date, "%d.%m.%Y")  # Kovnerterer tekst til en datoverdi
 
-# Funksjon 5
+# Funksjon 5 - estimerte minutter
 def get_duration(activity):  # Funksjon til menyvalg 5
     return activity.estimated_minutes
 
 
+# Lagre aktiviteter til fil og lese dem inn igjen.
+# Funksjon 6 - lagrer aktivitetene i en fil
+def save_activities(activities, filename):
+    with open(filename, "w", encoding="utf-8") as file:  # w - write
+        for activity in activities:
+            file.write(
+                f"{activity.title},{activity.category},{activity.date},"
+                f"{activity.estimated_minutes},{activity.status}\n"
+            )
 
+# Funksjon 7 - leser aktivitetene
+def read_activities(filename):
+    activities = []
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                title, category, date, estimated_minutes, status = line.strip().split(",")
+
+                activity = Activity(
+                    title,
+                    category,
+                    date,
+                    int(estimated_minutes),
+                    status
+                )
+
+                activities.append(activity)
+
+    except FileNotFoundError:
+        print("Filen ble ikke funnet")
+
+    return activities
+
+
+# Leser inn lagrede aktiviteter når programmet starter
+activities = read_activities("activities.txt")
+
+
+# Videre til meny
 running = True
 
 while running:   # Gjorde lignende meny i oppgave 2
@@ -207,11 +248,16 @@ while running:   # Gjorde lignende meny i oppgave 2
 
     # Lagre aktiviteter til fil og lese dem inn igjen.
     elif choice == "8":
+        save_activities(activities, "activities.txt")
+        print("Aktivitetene er lagret.")
 
     # Avslutt
-    else:
+    elif choice == "9":
         print("Hadebra!")
         running = False
+
+    else:
+        print("Ugyldig, vennligst velg 1-9")   # Får bruker til å måtte velge mellom 1 og 9, så programmet ikke slutter selv om man skriver 10.
 
 
 
