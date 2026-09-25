@@ -1,9 +1,9 @@
 # Oppgave 3 - Funksjoner og dokumentasjon
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta  # Importerer data fra standarbiblioteket
 
 # En funksjon som tar imot en dato på formatet dd.mm.åååå og returnerer en datoverdi når teksten er gyldig
 def find_date(date_input):
-    date = datetime.strptime(date_input, '%d.%m.%Y') # Kom opp automatisk
+    date = datetime.strptime(date_input, '%d.%m.%Y') # Gjør om tekst til datoverdi
     return date
 
 while True:
@@ -19,7 +19,7 @@ print(found_date)
 
 # En funksjon som tar imot starttidspunkt og minutter og returnerer sluttid
 def calculate_end_time(start_time, minutes):
-    end_time = start_time + timedelta(minutes=minutes)
+    end_time = start_time + timedelta(minutes=minutes)  # minutes (1) sier at tidsmengden skal være i minutter og minutes (2) er vaiablen
     return end_time
 
 while True:
@@ -50,7 +50,7 @@ print(end_time.strftime("%H:%M"))
 # En funksjon som tar imot to datoer og returnerer positivt antall dager mellom dem
 def calculate_days(date1, date2):
     difference = date2 - date1
-    return abs(difference.days)
+    return abs(difference.days)  # absoluttverdi - gjør at hvis forskjellen er -5 dager, blir det 5 dager forskjell
 
 while True:
     try:
@@ -69,7 +69,7 @@ print(f"Mellom datoene er det {difference_in_days} dager.")
 
 # En funksjon som tar imot en list med datoer og returnerer en kronologisk sortert list
 def sort_dates(date_list):
-    date_list.sort()
+    date_list.sort()  # .sort() sorterer datoene
     return date_list
 
 date_list = []
