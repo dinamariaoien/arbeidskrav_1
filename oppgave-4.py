@@ -1,5 +1,5 @@
 # OPPGAVE 4
-import csv
+import csv  # importerer csv fil så programmet kan lese det
 
 # Oppgave 4.1 - Les og kontroller data
 valid_requests = []   # Liste for gyldige henvendelser
@@ -13,7 +13,7 @@ try:
             # Sjekker om alle feltene har en verdi
             if not row["id"] or not row["category"] or not row["minutes"] or not row["is_resolved"]:
                 print(f"Rad {row_number}: Mangler verdi")
-                continue
+                continue  # sier: hopp over resten av runden ig gå direkte til neste i løkken
 
             try:
                 # Gjør id og minutes om til heltall
