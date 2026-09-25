@@ -68,3 +68,35 @@ De feilene jeg fant og rettet på var:
 3: Endret return total_minutes til return total, fordi total_minutes finnes ikke i fuksjonen, 
 og variablen i funksjonen som samler minuttene heter total.  
 4: La til valid_request i () i sum_resolved_minutes(), fordi funksjonen trenger en liste å kjøre. 
+
+### Oppgave 5 - Miniprosjekt
+#### Funksjon
+Programmet er en aktivitetsplalegger hvor brukeren kan:  
+1. Registrere og vise aktiviteter.  
+2. Søke etter tittel eller kategori.  
+3. Filtrere etter status.  
+4. Sortere etter dato eller varighet.  
+5. Markere en aktivitet som fullført.  
+6. Vise antall aktiviteter, samlet estimert tid og antall fullførte.  
+7. Lagre aktiviteter til fil og lese dem inn igjen.  
+8. Avslutte programmet.
+
+#### Filstruktur
+oppgave-5.py: inneholder klasse, funksjoner, løkker og menyer
+activities.txt: lagrer aktivitetene
+
+#### Teksttilfeller
+1. Når en aktivitet lagres med riktige verdier - verdien lagres  
+2. Når man skriver minutter med tekst som "hei" - feilmldig og må prøve på nytt  
+3. Når man søker etter en tittel som finnes - vises i terminalen  
+4. Når man skriver 10 - feilmelding og må skrive 1-9  
+5. Når man skriver 9 - man får en "hade" melding og programmet slutter
+
+#### Feil og forbedringer
+- Flere aktiviteter kan ha samme tittel  
+- Mulighet for å endre aktivitetene  
+- Mulighet for å slette aktivitetene  
+- Man kan bare søke på tittel og kategori  
+
+### Oppgave 6 - Video
+Rakk dessverre ikke å lage videoen, får prøve igjen på et nytt forsøk eventuelt. 
