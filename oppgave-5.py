@@ -75,11 +75,25 @@ def add_activities(activities):
 # Funksjon 2
 def show_activities(activities):
     """Funksjonen viser alle aktivitetene"""
-    if len(activities) == 0:
+    if len(activities) == 0:  # len() - viser hvis ingen aktiviteter hadde vært registrert, med det er allerede registrerte aktiviteter son jeg har lagt i en liste, så vet ikke om det er nødvendig?
         print("Ingen registrerte")
     else:
         for activity in activities:
             print(activity.title, activity.category, activity.date, activity.estimated_minutes)
+
+
+# Funksjon 3
+def search_title_category(activities):
+    search = input("Søk etter tittel eller kategori:")
+
+    while search == "" or search == " ":
+        print("Søkefeltet kan ikke være tomt.")
+        search = input("Søk etter tittel eller kategori:")
+
+    for activity in activities:
+        if search in activity.title or search in activity.category:
+            print(activity.title, activity.category, activity.date, activity.estimated_minutes, activity.status)
+
 
 
 running = True
@@ -87,14 +101,15 @@ running = True
 while running:   # Gjorde lignende meny i oppgave 2
     print("\n1. Registrer aktivitet")
     print("2. Vis alle aktiviteter")
-    print("3. Filtrer etter status")
-    print("4. Sorter etter dato eller varighet")
-    print("5. Markere en aktivitet som fullført")
-    print("6. Vis antall aktiviteter, samlet estimert tid og antall fullførte")
-    print("7. Lagre aktiviteter til fil og lese dem inn igjen")
-    print("8. Avslutt")
+    print("3. Søke etter tittel eller kategori")
+    print("4. Filtrer etter status")
+    print("5. Sorter etter dato eller varighet")
+    print("6. Markere en aktivitet som fullført")
+    print("7. Vis antall aktiviteter, samlet estimert tid og antall fullførte")
+    print("8. Lagre aktiviteter til fil og lese dem inn igjen")
+    print("9. Avslutt")
 
-    choice = input("Velg et alternativ (1-8): ")
+    choice = input("Velg et alternativ (1-9): ")
 
     if choice == "1":
         add_activities(activities)
