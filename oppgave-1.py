@@ -5,7 +5,7 @@ def oppgave1_1 ():
             study_sessions = int(input("Antall studieøkter:"))
             minutes_per_session = int(input("Hvor mange minutter varer hver studieøkt?"))
 
-            if study_sessions <= 0 or minutes_per_session <= 0:
+            if study_sessions <= 0 or minutes_per_session <= 0:  # feilmeldig dersom verdien er negativ
                 print("Prøv igjen")
             else:
                 break
@@ -14,19 +14,19 @@ def oppgave1_1 ():
             print("Ugyldig data.")
 
     total_minutes = study_sessions * minutes_per_session
-    hours = total_minutes // 60
-    remaining_minutes = total_minutes % 60
+    hours = total_minutes // 60  # finner hele timer
+    remaining_minutes = total_minutes % 60  # finner resterende minutter
 
     print (f"Samlet tidsbruk: {hours} timer og {remaining_minutes} minutter.")
 
-oppgave1_1()
+oppgave1_1()  # Kaller tilbake funksjonen
 
 
 # Oppgave 1.2 - Analyser tekst
 def oppgave1_2 ():
     text = input("Skriv inn en tekst: ")
 
-    while text =="" or text == " ":
+    while text =="" or text == " ":   # feilmelding dersom brukeren skriver ingenting eller kun mellomrom
         print("Feil! Må være gyldig input")
         text = input("Skriv inn en tekst: ")
 
@@ -37,9 +37,9 @@ def oppgave1_2 ():
 
     print(text.lower())
 
-    print(text[::-1])
+    print(text[::-1])  # snur rekkefølgen
 
-    if "python" in text.lower():
+    if "python" in text.lower():  # lower gjør alle bokstaver til små bokstaver
         print("Python in text")
     else:
         print("Python not in text")
@@ -58,11 +58,11 @@ def oppgave1_3 ():
         end_value = int(input("Endverdi: "))
 
     for number in range(start_value, end_value + 1): # +1 for å få med sluttverdien
-        if number % 2 == 0:
+        if number % 2 == 0:  # om tallet er helt dersom det deles på 2 uten rest
             print(number)
 
     for number in range(start_value, end_value + 1):
-        if number % 3 == 0:
+        if number % 3 == 0:  # om tallet er helt dersom det deles på 3 uten rest
             print(number)
 
     total = 0
